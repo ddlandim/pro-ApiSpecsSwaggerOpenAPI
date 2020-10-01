@@ -1,0 +1,22 @@
+openapi: 3.0.0
+info:
+  title: H Plus Sports API
+  version: 1.0.0
+paths:
+  /product:
+    get:
+      responses:
+        200:
+          description: This is a list of the products in the catalog
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      example: 400
+                    name:
+                      type: string
+                      example: Lemon Water

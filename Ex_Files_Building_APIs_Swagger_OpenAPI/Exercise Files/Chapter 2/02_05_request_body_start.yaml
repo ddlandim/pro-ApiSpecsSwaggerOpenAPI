@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: H Plus Sports API
+  version: 1.0.0
+paths:
+  /product/{productId}:
+    get:
+      parameters: 
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: integer
+            example: 12345
+        - in: header
+          name: customer-security-header
+          required: false
+          schema:
+            type: integer
+            example: 12312-323423-2323
+      responses:
+        200:
+          description: This is a list of the products in the catalog
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 400
+                  name:
+                    type: string
+                    example: Lemon Water        
+  /product:
+    get:
+      parameters: 
+        - in: query
+          name: pageNumber
+          description: Page number to return
+          required: false
+          schema:
+            type: integer
+            example: 1
+        - in: query
+          name: pageSize
+          description: Number of results in the page
+          required: false
+          schema:
+            type: integer
+            example: 10
+            maximum: 100
+      responses:
+        200:
+          description: This is a list of the products in the catalog
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      example: 400
+                    name:
+                      type: string
+                      example: Lemon Water

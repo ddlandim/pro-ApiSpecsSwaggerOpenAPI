@@ -1,0 +1,182 @@
+openapi: 3.0.3
+
+# Your API Access Key : 184ff433582e3c573bc547782ca45a1f
+
+# There are several API endpoints to choose from:
+# Current Weather: Get current weather data.
+# Historical Weather: Get historical weather data.
+# Historical Time-Series: Get historical time-series weather data.
+# Weather Forecast: Get weather forecast for up to 14 days.
+# Location Lookup: Look up one or multiple locations.
+# Base URL: API requests start out with the following base URL:
+
+# http://api.weatherstack.com/
+
+# Make GET CURRENT WHEATER API Request
+# http://api.weatherstack.com/current
+#     ? access_key = YOUR_ACCESS_KEY
+#     & query = Jacarei
+    
+# optional parameters: 
+#     & units = m
+#     & language = pt-br
+#     & callback = MY_CALLBACK
+
+info:
+  version: 0.0.1
+  title: Wheater Stack
+  description: | 
+    A brief description of the API.
+    It can be multiple lines.
+
+    This API follows the recommendations of the
+    [API Improvement Proposals](https://google.aip.dev/).
+
+# Servers where this API is hosted
+servers: 
+  - url: http://api.weatherstack.com
+paths:
+  /{current}:
+    get:
+      parameters: 
+        - $ref: '#/components/parameters/Token'
+        - $ref: '#/components/parameters/Query'
+      responses:
+        200:
+          description: Return request,location and current wheater
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+                $ref: '#/components/schemas/Current'
+        500:
+          $ref: '#/components/responses/500ApiError'
+components:
+  parameters:
+    Token:
+      in: query
+      name: access_key 
+      description: API KEY from wheater data account
+      required: true
+      schema:
+        type: String
+        example: AYshaysdmlSShd12354
+    Query:
+      in: query
+      name: query
+      description: City Parameters, ex - Jacarei
+      required: true
+      schema:
+        type: String
+        example: Jacarei
+  schemas:
+    Location:
+      name: location
+      type: object
+      properties:
+        name:
+          type: String
+          example: Jacarei
+          #pattern: '[a-z0-9-]+'
+        country:
+          type: String
+          example: Brazil
+        region: 
+          type: String
+          example: Sao Paulo
+        lat:
+          type: Integer
+          example: -23.317
+        lon: 
+          type: Integer
+          example: -45.967
+        timezone_id:
+          type: String
+          example: America/Sao_Paulo
+        localtime:
+          type: Datetime
+          example: 2020-09-30 19:57
+        localtime_epoch:
+          type: Integer
+          example: 1601495820
+        utc_offset:
+          type: Integer
+          example: -3.0
+    Current:
+      name: current
+      type: object
+      properties:
+        observation_time:
+          type: Datetime
+          example: 10:57 PM
+        temperature:
+          type: Integer
+          example: 24
+        weather_code:
+          type: Integer
+          example: 24
+        weather_icons: $
+        weather_descriptions: $
+          type: Integer
+          example: 24
+        wind_speed:
+          type: Integer
+          example: 24
+        wind_degree:
+          type: Integer
+          example: 24
+        wind_dir:
+          type: String
+          example: S
+        pressure:
+          type: Integer
+          example: 24
+        precip:
+          type: Integer
+          example: 24
+        humidity:
+          type: Integer
+          example: 24
+        cloudcover:
+          type: Integer
+          example: 24
+        feelslike:
+          type: Integer
+          example: 24
+        uv_index:
+          type: Integer
+          example: 24
+        visibility:
+          type: Integer
+          example: 24
+        is_day:
+          type: Boolean
+          example: yes
+  responses:
+    500ApiError:
+      description: This is an unexpected error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: string
+                example: 500
+              message:
+                type: string
+                example: This is an error
+            
+            
+            
+            
+            
+            
+            
+            
+  
+  
+  
+  
+  
+  
